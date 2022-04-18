@@ -74,6 +74,9 @@ public interface RequestPlaceHolder {
     @GET("get-bapa-account-list")
     Call<List<DownloadedPreviousReadings>> downloadBapaAccounts(@Query("BAPAName") String BAPAName, @Query("ServicePeriod") String ServicePeriod);
 
+    @GET("update-bapa-schedule")
+    Call<String> updateBapaSched(@Query("id") String id);
+
     /**
      * DISCONNECTION
      */

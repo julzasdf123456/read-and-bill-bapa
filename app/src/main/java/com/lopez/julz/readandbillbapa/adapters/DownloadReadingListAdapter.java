@@ -287,7 +287,7 @@ public class DownloadReadingListAdapter extends RecyclerView.Adapter<DownloadRea
              * UPDATE STATUS
              */
             try {
-                Call<String> stringCall = requestPlaceHolder.updateDownloadedStatus(id);
+                Call<String> stringCall = requestPlaceHolder.updateBapaSched(id);
 
                 stringCall.enqueue(new Callback<String>() {
                     @Override
