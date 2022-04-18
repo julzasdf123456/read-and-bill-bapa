@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lopez.julz.readandbillbapa">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.LOCAL_MAC_ADDRESS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ReadAndBill">
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.SettingsActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.UploadDisconnectionActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.DisconnectionFormActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.DisconnectionListActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.DisconnectionMenuListActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.DownloadDisconnectionListActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.DisconnectionHomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ReadAndBillFullScreen" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.UploadReadingsActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.ReadingFormActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.ReadingConsoleActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ReadAndBillFullScreen" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.ReadingListActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ReadAndBillFullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.DownloadReadingListActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.HomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ReadAndBillFullScreen" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.DownloadActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.DownloadSelectActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.UploadActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.CreateTracksActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.lopez.julz.readandbillbapa.RecordTracksActivity"
+            android:exported="true" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.lopez.julz.readandbillbapa"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>
