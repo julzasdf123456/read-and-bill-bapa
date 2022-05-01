@@ -15,7 +15,12 @@ public class ReadingHelpers {
     public static String getKwhUsed(DownloadedPreviousReadings dprPrev, Double current) {
         try {
             String kwUsed = dprPrev.getKwhUsed() != null ? dprPrev.getKwhUsed() : "0";
-            Double prev = Double.valueOf(kwUsed);
+            Double prev = 0.0;
+            if (dprPrev.getChangeMeterStartKwh() != null) {
+                prev = Double.valueOf(dprPrev.getChangeMeterStartKwh());
+            } else {
+                prev = Double.valueOf(kwUsed);
+            }
             return (current - prev) + "";
         } catch (Exception e) {
             Log.e("ERR_GET_KWH", e.getMessage());
@@ -89,6 +94,9 @@ public class ReadingHelpers {
     public static String getLifelineRate(DownloadedPreviousReadings dpr, Bills bill, Rates rate) {
         try {
             double kwhUsed = Double.valueOf(bill.getKwhUsed()) * Double.valueOf(bill.getMultiplier());
+            if (dpr.getChangeMeterAdditionalKwh() != null) {
+                kwhUsed += Double.valueOf(Double.valueOf(dpr.getChangeMeterAdditionalKwh()));
+            }
 
             double deductibles = Double.valueOf(bill.getGenerationSystemCharge()) +
                     Double.valueOf(bill.getTransmissionDeliveryChargeKWH()) +
@@ -135,6 +143,9 @@ public class ReadingHelpers {
     public static String getSeniorCitizenDiscount(DownloadedPreviousReadings dpr, Bills bill, Rates rate) {
         try {
             double kwhUsed = Double.valueOf(bill.getKwhUsed()) * Double.valueOf(bill.getMultiplier());
+            if (dpr.getChangeMeterAdditionalKwh() != null) {
+                kwhUsed += Double.valueOf(Double.valueOf(dpr.getChangeMeterAdditionalKwh()));
+            }
 
             double deductibles = Double.valueOf(bill.getGenerationSystemCharge()) +
                     Double.valueOf(bill.getTransmissionDeliveryChargeKWH()) +
@@ -235,6 +246,9 @@ public class ReadingHelpers {
                 String coreLossRaw = dpr.getCoreloss() != null ? dpr.getCoreloss() : "0";
                 double coreloss = Double.valueOf(coreLossRaw);
                 double kwhUsedFinal = multiplier * kwhUsed;
+                if (dpr.getChangeMeterAdditionalKwh() != null) {
+                    kwhUsedFinal += Double.valueOf(Double.valueOf(dpr.getChangeMeterAdditionalKwh()));
+                }
 
                 String arrearsLedger = dpr.getArrearsLedger() != null ? dpr.getArrearsLedger() : "0";
                 double additionalCharges = Double.valueOf(arrearsLedger);
@@ -337,6 +351,9 @@ public class ReadingHelpers {
                     bill.setMultiplier(dpr.getMultiplier());
                     bill.setCoreloss(coreLossRaw);
                     bill.setKwhUsed(kwhUsed + "");
+                    if (dpr.getChangeMeterAdditionalKwh() != null) {
+                        kwhUsedFinal += Double.valueOf(Double.valueOf(dpr.getChangeMeterAdditionalKwh()));
+                    }
                     bill.setPreviousKwh(dpr.getKwhUsed());
                     bill.setPresentKwh(presReading + "");
                     bill.setKwhAmount(ObjectHelpers.roundFourNoComma(effectiveRate * kwhUsedFinal));

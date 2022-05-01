@@ -80,6 +80,8 @@ public class ReadingListActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
+//                db.billsDao().revertUploadAll();
+//                db.readingsDao().revertUploadAll();
                 readingSchedulesList.addAll(db.readingSchedulesDao().getActiveSchedules());
 //                Log.e("TEST", readingSchedulesList.size() + "");
             } catch (Exception e) {

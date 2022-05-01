@@ -77,7 +77,7 @@ public class HomeActivity extends AppCompatActivity {
             homeMenuList.add(new HomeMenu(getDrawable(R.drawable.ic_baseline_download_for_offline_18), "Download", "#4caf50"));
             homeMenuList.add(new HomeMenu(getDrawable(R.drawable.ic_baseline_cloud_upload_24), "Upload", "#ff7043"));
             homeMenuList.add(new HomeMenu(getDrawable(R.drawable.ic_baseline_data_thresholding_24), "Reading List", "#5c6bc0"));
-            homeMenuList.add(new HomeMenu(getDrawable(R.drawable.ic_baseline_edit_location_alt_24), "Reading Tracks", "#78909c"));
+//            homeMenuList.add(new HomeMenu(getDrawable(R.drawable.ic_baseline_edit_location_alt_24), "Reading Tracks", "#78909c"));
 //            homeMenuList.add(new HomeMenu(getDrawable(R.drawable.ic_baseline_domain_disabled_24), "Disconnection", "#f44336"));
 
             homeMenuAdapter.notifyDataSetChanged();
@@ -102,20 +102,25 @@ public class HomeActivity extends AppCompatActivity {
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             if (settings != null) {
-                if (settings.getDefaultServer() != null && settings.getDefaultServer().equals("203.177.135.179:8443")) {
-                    bottomBarNotif.setText("Server: " + settings.getDefaultServer() + " (via internet) | BAPA: " + settings.getBAPAName());
-                    bottomBarNotif.setBackgroundResource(R.color.orange_500);
-                } else {
-                    bottomBarNotif.setText("Server: " + settings.getDefaultServer() + " (via local network) | BAPA: " + settings.getBAPAName());
-                    bottomBarNotif.setBackgroundResource(R.color.grey_100);
-                }
+                if (settings.getBAPAName() != null && settings.getBAPAName().length() > 0) {
+                    if (settings.getDefaultServer() != null && settings.getDefaultServer().equals("203.177.135.179:8443")) {
+                        bottomBarNotif.setText("Server: " + settings.getDefaultServer() + " (via internet) | BAPA: " + settings.getBAPAName());
+                        bottomBarNotif.setBackgroundResource(R.color.orange_500);
+                    } else {
 
-                menu_recyclerview = findViewById(R.id.menu_recyclerview);
-                homeMenuList = new ArrayList<>();
-                homeMenuAdapter = new HomeMenuAdapter(homeMenuList, HomeActivity.this, userId, settings.getBAPAName());
-                menu_recyclerview.setAdapter(homeMenuAdapter);
-                menu_recyclerview.setLayoutManager(new GridLayoutManager(HomeActivity.this, 2));
-                addMenu();
+                        bottomBarNotif.setText("Server: " + settings.getDefaultServer() + " (via local network) | BAPA: " + settings.getBAPAName());
+                        bottomBarNotif.setBackgroundResource(R.color.grey_100);
+                    }
+
+                    menu_recyclerview = findViewById(R.id.menu_recyclerview);
+                    homeMenuList = new ArrayList<>();
+                    homeMenuAdapter = new HomeMenuAdapter(homeMenuList, HomeActivity.this, userId, settings.getBAPAName());
+                    menu_recyclerview.setAdapter(homeMenuAdapter);
+                    menu_recyclerview.setLayoutManager(new GridLayoutManager(HomeActivity.this, 2));
+                    addMenu();
+                } else {
+                    startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+                }
             } else {
                 AlertHelpers.showMessageDialog(HomeActivity.this, "Settings Not Initialized", "Failed to load settings. Go to settings and set all necessary parameters to continue.");
             }

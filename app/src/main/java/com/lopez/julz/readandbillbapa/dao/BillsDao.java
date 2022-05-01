@@ -23,4 +23,7 @@ public interface BillsDao {
 
     @Query("SELECT * FROM Bills WHERE UploadStatus = 'UPLOADABLE'")
     List<Bills> getUploadables();
+
+    @Query("UPDATE Bills SET UploadStatus='UPLOADABLE'")
+    void revertUploadAll();
 }

@@ -148,7 +148,6 @@ public class UploadReadingsActivity extends AppCompatActivity {
         try {
             if (readingsList.size() > 0) {
                 Call<Readings> readingsCall = requestPlaceHolder.uploadReadings(readingsList.get(0));
-                Log.e("UPLD_READING", readingsList.get(0).getAccountNumber());
 
                 readingsCall.enqueue(new Callback<Readings>() {
                     @Override
@@ -156,6 +155,7 @@ public class UploadReadingsActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             new UpdateReadings().execute(readingsList.get(0));
                             uploadProgress.setProgress(progress);
+                            Log.e("UPLD_READING", readingsList.get(0).getAccountNumber());
 
                             readingsList.remove(0);
 
@@ -197,7 +197,6 @@ public class UploadReadingsActivity extends AppCompatActivity {
         try {
             if (billsList.size() > 0) {
                 Call<Bills> billsCall = requestPlaceHolder.uploadBills(billsList.get(0));
-                Log.e("UPLD_BILL", billsList.get(0).getAccountNumber() + " - " + billsList.get(0).getNetAmount());
 
 
                 billsCall.enqueue(new Callback<Bills>() {
@@ -206,6 +205,7 @@ public class UploadReadingsActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             new UpdateBills().execute(billsList.get(0));
                             uploadProgress.setProgress(progress);
+                            Log.e("UPLD_BILL", billsList.get(0).getAccountNumber() + " - " + billsList.get(0).getNetAmount());
 
                             billsList.remove(0);
 

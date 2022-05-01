@@ -45,7 +45,7 @@ public class AccountsListAdapter extends RecyclerView.Adapter<AccountsListAdapte
         DownloadedPreviousReadings downloadedPreviousReadings = downloadedPreviousReadingsList.get(position);
 
         holder.accountName.setText(downloadedPreviousReadings.getServiceAccountName());
-        holder.accountNumber.setText(downloadedPreviousReadings.getId() + " | " + downloadedPreviousReadings.getAccountType());
+        holder.accountNumber.setText((downloadedPreviousReadings.getOldAccountNo() != null ? downloadedPreviousReadings.getOldAccountNo() : "-" ) + " (" + downloadedPreviousReadings.getId() + ") | " + downloadedPreviousReadings.getAccountType());
 
         if (downloadedPreviousReadings.getAccountStatus().equals("ACTIVE")) {
             if (downloadedPreviousReadings.getStatus() != null) {

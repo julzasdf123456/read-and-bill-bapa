@@ -23,4 +23,7 @@ public interface ReadingsDao {
 
     @Query("SELECT * FROM Readings WHERE UploadStatus = 'UPLOADABLE'")
     List<Readings> getUploadables();
+
+    @Query("UPDATE Readings SET UploadStatus='UPLOADABLE'")
+    void revertUploadAll();
 }

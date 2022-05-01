@@ -25,42 +25,48 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReadAndBill">
         <activity
-            android:name="com.lopez.julz.readandbillbapa.SettingsActivity"
+            android:name=".UnbilledActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.UploadDisconnectionActivity"
+            android:name=".ReadingListViewActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.DisconnectionFormActivity"
+            android:name=".SettingsActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.DisconnectionListActivity"
+            android:name=".UploadDisconnectionActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.DisconnectionMenuListActivity"
+            android:name=".DisconnectionFormActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.DownloadDisconnectionListActivity"
+            android:name=".DisconnectionListActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.DisconnectionHomeActivity"
+            android:name=".DisconnectionMenuListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DownloadDisconnectionListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DisconnectionHomeActivity"
             android:exported="true"
             android:theme="@style/Theme.ReadAndBillFullScreen" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.UploadReadingsActivity"
+            android:name=".UploadReadingsActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.ReadingFormActivity"
+            android:name=".ReadingFormActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.ReadingConsoleActivity"
+            android:name=".ReadingConsoleActivity"
             android:exported="true"
             android:theme="@style/Theme.ReadAndBillFullScreen" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.ReadingListActivity"
+            android:name=".ReadingListActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.ReadAndBillFullScreen">
             <intent-filter>
@@ -70,26 +76,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.lopez.julz.readandbillbapa.DownloadReadingListActivity"
+            android:name=".DownloadReadingListActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.HomeActivity"
+            android:name=".HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.ReadAndBillFullScreen" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.DownloadActivity"
+            android:name=".DownloadActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.DownloadSelectActivity"
+            android:name=".DownloadSelectActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.UploadActivity"
+            android:name=".UploadActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.CreateTracksActivity"
+            android:name=".CreateTracksActivity"
             android:exported="true" />
         <activity
-            android:name="com.lopez.julz.readandbillbapa.RecordTracksActivity"
+            android:name=".RecordTracksActivity"
             android:exported="true" />
 
         <provider

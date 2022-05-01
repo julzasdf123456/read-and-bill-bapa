@@ -103,7 +103,7 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
      * FORM
      */
     public EditText prevReading, presReading, notes;
-    public TextView kwhUsed, accountType, rate, sequenceCode, accountStatus, coreloss, multiplier, seniorCitizen, currentArrears, totalArrears;
+    public TextView kwhUsed, accountType, rate, sequenceCode, accountStatus, coreloss, multiplier, seniorCitizen, currentArrears, totalArrears, additionalKwh;
     public MaterialButton billBtn, nextBtn, prevBtn, takePhotoButton, printBtn;
     public RadioGroup fieldStatus;
 
@@ -175,11 +175,14 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
         currentArrears = findViewById(R.id.currentArrears);
         totalArrears = findViewById(R.id.totalArrears);
         printBtn = findViewById(R.id.printBtn);
+        additionalKwh = findViewById(R.id.additionalKwh);
 
         printBtn.setVisibility(View.GONE);
 
         fieldStatus.setVisibility(View.GONE);
         billBtn.setVisibility(View.GONE);
+
+        presReading.requestFocus();
 
         // MAP
         mapView = findViewById(R.id.mapviewReadingForm);
@@ -566,7 +569,11 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
             super.onPostExecute(unused);
             accountName.setText(currentDpr.getServiceAccountName() != null ? currentDpr.getServiceAccountName() : "n/a");
             accountNumber.setText(currentDpr.getId());
-            prevReading.setText(currentDpr.getKwhUsed()!=null ? currentDpr.getKwhUsed() : "0");
+            if (currentDpr.getChangeMeterStartKwh() != null) {
+                prevReading.setText(currentDpr.getChangeMeterStartKwh());
+            } else {
+                prevReading.setText(currentDpr.getKwhUsed()!=null ? currentDpr.getKwhUsed() : "0");
+            }
             accountType.setText(ReadingHelpers.getAccountType(currentDpr));
             sequenceCode.setText(currentDpr.getSequenceCode());
             rate.setText(currentRate.getTotalRateVATIncluded() != null ? (ObjectHelpers.roundFour(Double.parseDouble(currentRate.getTotalRateVATIncluded()))) : "0");
@@ -576,6 +583,9 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
             seniorCitizen.setText(currentDpr.getSeniorCitizen() != null ? currentDpr.getSeniorCitizen() : "No");
             currentArrears.setText(currentDpr.getArrearsLedger() != null ? ObjectHelpers.roundTwo(Double.valueOf(currentDpr.getArrearsLedger())) : "0.0");
             totalArrears.setText(currentDpr.getBalance() != null ? ObjectHelpers.roundTwo(Double.valueOf(currentDpr.getBalance())) : "0.0");
+            if (currentDpr.getChangeMeterAdditionalKwh() != null) {
+                additionalKwh.setText(currentDpr.getChangeMeterAdditionalKwh());
+            }
 
             /**
              * IF ALREADY READ
@@ -671,7 +681,11 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
             super.onPostExecute(unused);
             accountName.setText(currentDpr.getServiceAccountName() != null ? currentDpr.getServiceAccountName() : "n/a");
             accountNumber.setText(currentDpr.getId());
-            prevReading.setText(currentDpr.getKwhUsed()!=null ? currentDpr.getKwhUsed() : "0");
+            if (currentDpr.getChangeMeterStartKwh() != null) {
+                prevReading.setText(currentDpr.getChangeMeterStartKwh());
+            } else {
+                prevReading.setText(currentDpr.getKwhUsed()!=null ? currentDpr.getKwhUsed() : "0");
+            }
             accountType.setText(ReadingHelpers.getAccountType(currentDpr));
             sequenceCode.setText(currentDpr.getSequenceCode());
             rate.setText(ObjectHelpers.roundFour(Double.parseDouble(currentRate.getTotalRateVATIncluded())));
@@ -681,6 +695,9 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
             seniorCitizen.setText(currentDpr.getSeniorCitizen() != null ? currentDpr.getSeniorCitizen() : "No");
             currentArrears.setText(currentDpr.getArrearsLedger() != null ? ObjectHelpers.roundTwo(Double.valueOf(currentDpr.getArrearsLedger())) : "0.0");
             totalArrears.setText(currentDpr.getBalance() != null ? ObjectHelpers.roundTwo(Double.valueOf(currentDpr.getBalance())) : "0.0");
+            if (currentDpr.getChangeMeterAdditionalKwh() != null) {
+                additionalKwh.setText(currentDpr.getChangeMeterAdditionalKwh());
+            }
 
             prevBtn.setEnabled(true);
             nextBtn.setEnabled(true);
