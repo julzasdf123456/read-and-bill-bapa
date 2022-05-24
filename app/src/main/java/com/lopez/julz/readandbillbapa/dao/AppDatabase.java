@@ -15,7 +15,7 @@ import androidx.room.RoomDatabase;
         ReadingImages.class,
         DisconnectionList.class,
         Settings.class,
-    }, version = 80)
+    }, version = 81)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract TrackNamesDao trackNamesDao();
 

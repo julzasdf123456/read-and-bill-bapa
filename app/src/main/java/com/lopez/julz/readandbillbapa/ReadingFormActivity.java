@@ -182,7 +182,7 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
         fieldStatus.setVisibility(View.GONE);
         billBtn.setVisibility(View.GONE);
 
-        presReading.requestFocus();
+//        presReading.requestFocus();
 
         // MAP
         mapView = findViewById(R.id.mapviewReadingForm);
@@ -342,7 +342,7 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
                             kwhUsed.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_baseline_error_outline_18), null);
                             fieldStatus.setVisibility(View.GONE);
                             fieldStatus.clearCheck();
-                            revealPhotoButton(false);
+//                            revealPhotoButton(false);
                         } else if (kwh == 0) {
                             /**
                              * SHOW OPTIONS FOR ZERO READING
@@ -350,12 +350,12 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
                             fieldStatus.setVisibility(View.VISIBLE);
                             fieldStatus.check(R.id.stuckUp);
                             takePhotoButton.setEnabled(true);
-                            revealPhotoButton(true);
+//                            revealPhotoButton(true);
                         } else {
                             kwhUsed.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                             fieldStatus.setVisibility(View.GONE);
                             fieldStatus.clearCheck();
-                            revealPhotoButton(false);
+//                            revealPhotoButton(false);
                         }
                         kwhUsed.setText(ObjectHelpers.roundTwo(kwh));
                     } else {
@@ -542,6 +542,7 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
         protected void onPreExecute() {
             super.onPreExecute();
             readingId = ObjectHelpers.getTimeInMillis() + "-" + ObjectHelpers.generateRandomString();
+            presReading.setEnabled(false);
         }
 
         @Override
@@ -567,6 +568,9 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
+
+            new GetPhotos().execute();
+
             accountName.setText(currentDpr.getServiceAccountName() != null ? currentDpr.getServiceAccountName() : "n/a");
             accountNumber.setText(currentDpr.getId());
             if (currentDpr.getChangeMeterStartKwh() != null) {
@@ -606,13 +610,13 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
                     /**
                      * SHOW TAKE PHOTO BUTTON
                      */
-                    revealPhotoButton(true);
+//                    revealPhotoButton(true);
                 }
             } else {
                 presReading.setText("");
                 notes.setText("");
                 kwhUsed.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-                revealPhotoButton(false);
+//                revealPhotoButton(false);
             }
 
             /**
@@ -624,7 +628,6 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
 //                printBtn.setVisibility(View.GONE);
 //            }
 
-            new GetPhotos().execute();
         }
     }
 
@@ -636,9 +639,11 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
             readingId = ObjectHelpers.getTimeInMillis() + "-" + ObjectHelpers.generateRandomString();
             prevBtn.setEnabled(false);
             nextBtn.setEnabled(false);
+            presReading.setEnabled(false);
             presReading.setText("");
             fieldStatus.clearCheck();
             fieldStatus.setVisibility(View.GONE);
+            revealPhotoButton(true);
         }
 
         @Override
@@ -679,6 +684,9 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
+
+            new GetPhotos().execute();
+
             accountName.setText(currentDpr.getServiceAccountName() != null ? currentDpr.getServiceAccountName() : "n/a");
             accountNumber.setText(currentDpr.getId());
             if (currentDpr.getChangeMeterStartKwh() != null) {
@@ -723,13 +731,13 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
                     /**
                      * SHOW TAKE PHOTO BUTTON
                      */
-                    revealPhotoButton(true);
+//                    revealPhotoButton(true);
                 }
             } else {
                 presReading.setText("");
                 notes.setText("");
                 kwhUsed.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-                revealPhotoButton(false);
+//                revealPhotoButton(false);
             }
 
             /**
@@ -740,8 +748,6 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
 //            } else {
 //                printBtn.setVisibility(View.GONE);
 //            }
-
-            new GetPhotos().execute();
         }
     }
 
@@ -929,7 +935,7 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra( MediaStore.EXTRA_FINISH_ON_COMPLETION, true);
         if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(cameraIntent, REQUEST_PICTURE_CAPTURE);
+//            startActivityForResult(cameraIntent, REQUEST_PICTURE_CAPTURE);
 
             File pictureFile = null;
             try {
@@ -942,7 +948,7 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
             }
             if (pictureFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.lopez.julz.readandbill",
+                        "com.lopez.julz.readandbillbapa",
                         pictureFile);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(cameraIntent, REQUEST_PICTURE_CAPTURE);
@@ -1005,10 +1011,12 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
             super.onPostExecute(unused);
 
             if (photosList != null) {
-//                revealPhotoButton(false);
                 for (int i = 0; i < photosList.size(); i++) {
                     File file = new File(photosList.get(i).getPhoto());
                     if (file.exists()) {
+                        revealPhotoButton(false);
+                        presReading.setEnabled(true);
+                        presReading.requestFocus();
                         try {
                             Log.e("TEST", file.getPath());
                             Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
@@ -1051,6 +1059,8 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
                         }
 
                     } else {
+                        revealPhotoButton(true);
+                        presReading.setEnabled(true);
                         Log.e("ERR_RETRV_FILE", "Error retriveing file");
                     }
                 }
@@ -1077,6 +1087,8 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
             }
             imageFields.addView(imageView);
             revealPhotoButton(false);
+            presReading.setEnabled(true);
+            presReading.requestFocus();
 
             imageView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override

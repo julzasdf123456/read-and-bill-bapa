@@ -283,10 +283,12 @@ public class UploadReadingsActivity extends AppCompatActivity {
                                     progress = 1;
                                     uploadProgress.setProgress(0);
                                     uploadStatusText.setText("Uploading Complete");
+                                    AlertHelpers.showMessageDialog(UploadReadingsActivity.this, "Upload Complete!", "All data and files uploaded!");
                                 }
                             } else {
                                 try {
                                     Log.e("ERR_UPLD_IMGS", response.raw() + "" + response.errorBody().string());
+                                    AlertHelpers.showMessageDialog(UploadReadingsActivity.this, "Images Upload Failed", response.raw() + "");
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -312,12 +314,14 @@ public class UploadReadingsActivity extends AppCompatActivity {
                         progress = 1;
                         uploadProgress.setProgress(0);
                         uploadStatusText.setText("Uploading Complete");
+                        AlertHelpers.showMessageDialog(UploadReadingsActivity.this, "Upload Complete!", "All data and files uploaded!");
                     }
                 }
             } else {
                 progress = 1;
                 uploadProgress.setProgress(0);
                 uploadStatusText.setText("Uploading Complete");
+                AlertHelpers.showMessageDialog(UploadReadingsActivity.this, "Upload Complete!", "All data and files uploaded!");
             }
 
         } catch (Exception e) {
