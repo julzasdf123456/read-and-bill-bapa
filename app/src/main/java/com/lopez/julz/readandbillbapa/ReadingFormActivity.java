@@ -207,6 +207,7 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
             @Override
             public void onClick(View view) {
                 dispatchTakePictureIntent();
+                Log.e("TEST", "PIC");
             }
         });
 
@@ -572,7 +573,7 @@ public class ReadingFormActivity extends AppCompatActivity implements OnMapReady
             new GetPhotos().execute();
 
             accountName.setText(currentDpr.getServiceAccountName() != null ? currentDpr.getServiceAccountName() : "n/a");
-            accountNumber.setText(currentDpr.getId());
+            accountNumber.setText(currentDpr.getOldAccountNo() + " | Meter No: " + currentDpr.getMeterSerial());
             if (currentDpr.getChangeMeterStartKwh() != null) {
                 prevReading.setText(currentDpr.getChangeMeterStartKwh());
             } else {
