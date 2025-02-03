@@ -134,6 +134,7 @@ public class SettingsActivity extends AppCompatActivity {
             servers.add("192.168.100.1");
             servers.add("192.168.110.94");
             servers.add("203.177.135.179:8443");
+            servers.add("203.177.135.180:11445");
             servers.add("192.168.0.100");
             servers.add("192.168.5.6");
             servers.add("192.168.0.111");

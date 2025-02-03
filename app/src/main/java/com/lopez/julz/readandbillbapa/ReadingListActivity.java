@@ -45,6 +45,7 @@ public class ReadingListActivity extends AppCompatActivity {
 
         userId = getIntent().getExtras().getString("USERID");
         bapaName = getIntent().getExtras().getString("BAPAName");
+        Log.e("TEST", bapaName);
 
         readingListToolbar = findViewById(R.id.readingListToolbar);
         setSupportActionBar(readingListToolbar);

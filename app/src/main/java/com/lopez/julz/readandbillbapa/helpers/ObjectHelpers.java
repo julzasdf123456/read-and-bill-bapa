@@ -158,6 +158,24 @@ public class ObjectHelpers {
         }
     }
 
+    public static String roundTwoNoComma(Double doubleX) {
+        try {
+            DecimalFormat df = new DecimalFormat("#.##");
+            return df.format(doubleX);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String roundTwoNoComma(String doubleX) {
+        try {
+            DecimalFormat df = new DecimalFormat("#.##");
+            return df.format(doubleX);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static Double doubleStringNull(String regex) {
         try {
             if (regex.equals(null)) {

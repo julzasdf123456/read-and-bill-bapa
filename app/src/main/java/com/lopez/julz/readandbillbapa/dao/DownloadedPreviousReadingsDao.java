@@ -28,6 +28,9 @@ public interface DownloadedPreviousReadingsDao {
     @Query("SELECT * FROM DownloadedPreviousReadings WHERE ServicePeriod = :servicePeriod AND OrganizationParentAccount = :bapaName ORDER BY SequenceCode")
     List<DownloadedPreviousReadings> getAllFromSchedule(String servicePeriod, String bapaName);
 
+    @Query("SELECT * FROM DownloadedPreviousReadings WHERE ServicePeriod = :servicePeriod")
+    List<DownloadedPreviousReadings> getAllFromSchedule(String servicePeriod);
+
     @Query("SELECT * FROM DownloadedPreviousReadings WHERE CAST(SequenceCode AS INT) > :sequenceCode AND OrganizationParentAccount = :bapaName AND Status IS NULL ORDER BY SequenceCode LIMIT 1")
     DownloadedPreviousReadings getNext(int sequenceCode, String bapaName);
 
